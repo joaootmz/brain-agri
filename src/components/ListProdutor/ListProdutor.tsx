@@ -2,6 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { useFormContext } from '@/context/formContext/FormContext';
+import AddCultureInput from '../AddCultureInput/AddCultureInput';
+import ListProdutorGet from './ListProdutorGet';
+import {
+    Sheet,
+    SheetContent,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+import AddIcon from '@mui/icons-material/Add';
+
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 
@@ -10,19 +19,29 @@ const ListProdutor: React.FC = () => {
 
     useEffect(() => {
         getFormData();
-        console.log(formState)
       }, []);
     return (
         <>
             <Card className="col-span-3">
                 <CardHeader>
-                    <CardTitle>Produtores rurais</CardTitle>
+                    <div className='flex justify-between'>
+                        <CardTitle>Produtores rurais</CardTitle>
+                        <Sheet>
+                        <SheetTrigger asChild className='cursor-pointer'>
+                            <AddIcon />
+                        </SheetTrigger>
+                        <SheetContent className="w-[50%]">
+                            <AddCultureInput />
+                        </SheetContent>
+                    </Sheet>
+                        
+                    </div>
                     <CardDescription>
                         Listagem atualizada dos produtores rurais atualizado.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <h2>aqui vai a lista</h2>
+                    <ListProdutorGet />
                 </CardContent>
             </Card>
 

@@ -1,90 +1,63 @@
-// import React, { PureComponent, ReactNode } from 'react';
-// import {
-//   PieChart,
-//   Pie,
-//   Cell,
-//   ResponsiveContainer,
-//   Label,
-//   LabelList,
-//   PieLabelRenderProps,
-// } from 'recharts';
+"use client"
 
-// interface DataItem {
-//   name: string;
-//   value: number;
-// }
+import React, { useEffect, useState } from 'react';
+import { PieChart, Pie, ResponsiveContainer } from 'recharts';
 
-// const data: DataItem[] = [
-//   { name: 'Group A', value: 400 },
-//   { name: 'Group B', value: 300 },
-//   { name: 'Group C', value: 300 },
-//   { name: 'Group D', value: 200 },
-// ];
+const data01 = [
+  { name: 'Group A', value: 400 },
+  { name: 'Group B', value: 300 },
+  { name: 'Group C', value: 300 },
+  { name: 'Group D', value: 200 },
+];
 
-// const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const data02 = [
+  { name: 'A1', value: 100 },
+  { name: 'A2', value: 300 },
+  { name: 'B1', value: 100 },
+  { name: 'B2', value: 80 },
+  { name: 'B3', value: 40 },
+  { name: 'B4', value: 30 },
+  { name: 'B5', value: 50 },
+  { name: 'C1', value: 100 },
+  { name: 'C2', value: 200 },
+  { name: 'D1', value: 150 },
+  { name: 'D2', value: 50 },
+];
 
-// const RADIAN = Math.PI / 180;
+const PieGraphic: React.FC = () => {
+    const [windowSize, setWindowSize] = useState<{ width: number; height: number }>({
+        width: 300, 
+        height: 300, 
+      });
+    
+      useEffect(() => {
+        const handleResize = () => {
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+        };
+    
+        if (typeof window !== 'undefined') {
+          handleResize(); 
+          window.addEventListener('resize', handleResize);
+        }
+    
+        return () => {
+          if (typeof window !== 'undefined') {
+            window.removeEventListener('resize', handleResize);
+          }
+        };
+      }, []);
+    
+      return (
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart width={windowSize.width} height={windowSize.height}>
+            <Pie data={data01} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
+            <Pie data={data02} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
+          </PieChart>
+        </ResponsiveContainer>
+      );
+};
 
-// const renderCustomizedLabel = (props: PieLabelRenderProps): ReactNode => {
-//     const { cx, cy, midAngle, innerRadius, outerRadius, percent, index } = props;
-  
-//     if (
-//       cx === undefined ||
-//       cy === undefined ||
-//       midAngle === undefined ||
-//       innerRadius === undefined ||
-//       outerRadius === undefined ||
-//       percent === undefined ||
-//       index === undefined
-//     ) {
-//       return null;
-//     }
-  
-//     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-//     const x = cx + radius * Math.cos(-midAngle * RADIAN);
-//     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  
-//     const numericPercent = typeof percent === 'number' ? percent : parseFloat(percent);
-  
-//     if (isNaN(numericPercent)) {
-//       return null;
-//     }
-  
-//     return (
-//       <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-//         {`${(numericPercent * 100).toFixed(0)}%`}
-//       </text>
-//     );
-//   };
-// export default class Example extends PureComponent {
-
-//   render() {
-//     return (
-//       <ResponsiveContainer width="100%" height="100%">
-//         <PieChart width={400} height={400}>
-//           <Pie
-//             data={data}
-//             cx="50%"
-//             cy="50%"
-//             labelLine={false}
-//             label={renderCustomizedLabel}
-//             outerRadius={80}
-//             fill="#8884d8"
-//             dataKey="value"
-//           >
-//             {data.map((entry, index) => (
-//               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-//             ))}
-//             <LabelList
-//               dataKey="name"
-//               position="outside"
-//               fill="#8884d8"
-//               // @ts-ignore
-//               renderLabel={renderCustomizedLabel}
-//             />
-//           </Pie>
-//         </PieChart>
-//       </ResponsiveContainer>
-//     );
-//   }
-// }
+export default PieGraphic;

@@ -40,10 +40,8 @@ const AddCultureInput: React.FC = () => {
         console.error('Erro ao salvar dados:', error);
       }
     };
-
-
     return (
-        <>
+        <div className='w-50'>
             <SheetHeader>
                 <SheetTitle>Adiocne um novo produtor rural</SheetTitle>
                 <SheetDescription>
@@ -137,7 +135,7 @@ const AddCultureInput: React.FC = () => {
                     <Button type="submit" onClick={handleSave}>Salvar</Button>
                 </SheetClose>
             </SheetFooter>
-        </>
+        </div>
     )
 }
 
