@@ -1,3 +1,14 @@
+Neste app foi utilizado a biblioteca shadcn ui para componetização, deste modo, foi possível realizar de forma mais elegante a distribuição das informações solicitadas, como dashboard, inputs e etc.
+
+Os dados foram guardados em um context, e o mock utilizando a ferramenta Mocky que gera uma primeira estrutura para get.
+
+Por tratar-se de dados ficticios, é retornado 200 e o console informa exatamente os dados salvos, mas não é atualizado a url do moxy.
+
+
+
+
+# informações padrão de um app em next:
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
