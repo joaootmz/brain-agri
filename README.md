@@ -1,3 +1,6 @@
+# informações gerais:
+
+
 Neste app foi utilizado a biblioteca shadcn ui para componetização, deste modo, foi possível realizar de forma mais elegante a distribuição das informações solicitadas, como dashboard, inputs e etc.
 
 Os dados foram guardados em um context, e o mock utilizando a ferramenta Mocky que gera uma primeira estrutura para get.
